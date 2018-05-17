@@ -2,7 +2,6 @@
     "name": "sqmmm/kodix-api-sdk",
     "type": "library",
     "description": "Sdk package for working with kodix.api",
-    "version": "1.0.0",
     "keywords": [
         "sqmmm",
         "kodix-api-sdk",
