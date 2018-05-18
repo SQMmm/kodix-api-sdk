@@ -10,6 +10,9 @@
 
 namespace Kodix\Api\DealerStorage;
 
+
+use Kodix\Api\Contracts\ResponseInterface;
+
 /**
  * Class Dealership
  * @package Kodix\Api\DealerStorage
@@ -32,7 +35,7 @@ class Dealership extends Entity
      * @param array $with - references
      * @param array $order - params for ordering list
      * @param null $version - method version
-     * @return \Kodix\Api\Response
+     * @return ResponseInterface
      */
     public function getList(
         array $pagination = [],

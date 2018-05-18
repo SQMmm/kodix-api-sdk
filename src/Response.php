@@ -12,12 +12,13 @@ namespace Kodix\Api;
 
 
 use Kodix\Api\Exceptions\ResponseExceptions;
+use Kodix\Api\Contracts\ResponseInterface;
 
 /**
  * Class Response
  * @package Kodix\Api
  */
-class Response
+class Response implements ResponseInterface
 {
     private $data = null;
     private $meta = null;

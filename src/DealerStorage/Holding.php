@@ -10,6 +10,8 @@
 
 namespace Kodix\Api\DealerStorage;
 
+use Kodix\Api\Contracts\ResponseInterface;
+
 /**
  * Class Holding
  * @package Kodix\Api\DealerStorage
@@ -30,7 +32,7 @@ class Holding extends Entity
      * @param array $select - selection fields
      * @param array $order - params for ordering list
      * @param null $version - method version
-     * @return \Kodix\Api\Response
+     * @return ResponseInterface
      */
     public function getList(array $filter = [], array $select = [], array $order = [], $version = null)
     {
