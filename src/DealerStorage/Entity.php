@@ -12,6 +12,7 @@ namespace Kodix\Api\DealerStorage;
 
 
 use Kodix\Api\BaseEntity;
+use Kodix\Api\Contracts\ResponseInterface;
 use Kodix\Api\Exceptions\MethodParametersException;
 
 /**
@@ -33,7 +34,7 @@ abstract class Entity extends BaseEntity
      * @param $id - element id
      * @param array $select - fields for getting
      * @param null $version - method version
-     * @return \Kodix\Api\Response
+     * @return ResponseInterface
      * @throws MethodParametersException
      */
     public function get($id, array $select = [], $version = null)
@@ -54,7 +55,7 @@ abstract class Entity extends BaseEntity
      *
      * @param array $fields - adding fields
      * @param null $version - method version
-     * @return \Kodix\Api\Response
+     * @return ResponseInterface
      */
     public function add(array $fields = [], $version = null)
     {
@@ -67,7 +68,7 @@ abstract class Entity extends BaseEntity
      * @param $id - element id
      * @param array $fields - updating fields
      * @param null $version - method version
-     * @return \Kodix\Api\Response
+     * @return ResponseInterface
      * @throws MethodParametersException
      */
     public function update($id, array $fields = [], $version = null)
@@ -86,7 +87,7 @@ abstract class Entity extends BaseEntity
      *
      * @param $id - element id
      * @param null $version - method version
-     * @return \Kodix\Api\Response
+     * @return ResponseInterface
      * @throws MethodParametersException
      */
     public function delete($id, $version = null)

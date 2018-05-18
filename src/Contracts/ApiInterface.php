@@ -12,12 +12,33 @@ namespace Kodix\Api\Contracts;
 
 
 use Kodix\Api\Exception;
+use Kodix\Api\Exceptions\AuthException;
 use Kodix\Api\Exceptions\NotAllowedMethodException;
 use Kodix\Api\Exceptions\TokenException;
-use Kodix\Api\Response;
 
 interface ApiInterface
 {
+    /**
+     * @return mixed
+     */
+    public function getAccessLogin();
+
+    /**
+     * @param string $login
+     * @return mixed
+     */
+    public function setAccessLogin($login);
+
+    /**
+     * @return mixed
+     */
+    public function getAccessPassword();
+
+    /**
+     * @param string $password
+     * @return mixed
+     */
+    public function setAccessPassword($password);
 
     /**
      * Set access token
@@ -53,11 +74,10 @@ interface ApiInterface
     /**
      * Set api token and return it
      *
-     * @param string $login
-     * @param string $password
      * @return string
+     * @throws AuthException
      */
-    public function auth($login, $password);
+    public function auth();
 
     /**
      * @param string $scope - name of scope (ex. dealer.storage)
@@ -68,7 +88,7 @@ interface ApiInterface
      * @param null $version
      * @throws NotAllowedMethodException
      * @throws TokenException
-     * @return Response
+     * @return ResponseInterface
      */
     public function call($scope, $route, $method, array $getParameters = [], array $postParameters = [], $version = null);
 

@@ -10,6 +10,8 @@
 
 namespace Kodix\Api;
 
+use Kodix\Api\Contracts\ResponseInterface;
+
 /**
  * Class BaseEntity
  * @package Kodix\Api
@@ -47,7 +49,7 @@ abstract class BaseEntity
      * @param array $getParameters
      * @param array $postParameters
      * @param null $version
-     * @return Response
+     * @return ResponseInterface
      */
     protected function _callMethod($httpMethod, $route, array $getParameters = [], array $postParameters = [], $version = null)
     {
