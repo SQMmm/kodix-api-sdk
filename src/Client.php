@@ -195,6 +195,7 @@ class Client implements ApiInterface
      * @param array $options
      * @return mixed|\Psr\Http\Message\ResponseInterface
      * @throws TokenExpiredException
+     * @throws Exception
      */
     private function _call($httpMethod, $url, array $options = [])
     {
@@ -204,6 +205,11 @@ class Client implements ApiInterface
         //check if token has expired
         if($response->getStatusCode() === 461){
             throw new TokenExpiredException('Token has expired');
+        }
+
+        //check if method forbidden
+        if($response->getStatusCode() === 403){
+            throw new Exception('Method forbidden');
         }
 
         return $response;
