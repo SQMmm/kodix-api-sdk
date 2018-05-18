@@ -116,7 +116,7 @@ class Client implements ApiInterface
         $login = $this->getAccessLogin();
         $password = $this->getAccessPassword();
 
-        if(strlen($login) === 0 || strlen($password)){
+        if(strlen($login) === 0 || strlen($password) === 0){
             throw new AuthException('Login or password is not set');
         }
 
