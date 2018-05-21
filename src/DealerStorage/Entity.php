@@ -33,11 +33,12 @@ abstract class Entity extends BaseEntity
      *
      * @param $id - element id
      * @param array $select - fields for getting
+     * @param array $with - relations
      * @param null $version - method version
      * @return ResponseInterface
      * @throws MethodParametersException
      */
-    public function get($id, array $select = [], $version = null)
+    public function get($id, array $select = [], array $with = [], $version = null)
     {
         if(strlen($id) === 0){
             throw new MethodParametersException('Does not set $id parameter');
@@ -46,7 +47,8 @@ abstract class Entity extends BaseEntity
         $route = $this->_getBaseRoute(). '/' . $id;
 
         return $this->_callMethod('get', $route, [
-            'select' => $select
+            'select' => $select,
+            'with' => $with
         ], [], $version);
     }
 
