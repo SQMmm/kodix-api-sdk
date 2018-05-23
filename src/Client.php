@@ -186,6 +186,7 @@ class Client implements ApiInterface
         }catch(RequestException $e){
 
             $response = $e->getResponse();
+            
         }
 
         $body = json_decode($response->getBody()->getContents(),true);
