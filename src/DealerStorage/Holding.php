@@ -11,6 +11,7 @@
 namespace Kodix\Api\DealerStorage;
 
 use Kodix\Api\Contracts\ResponseInterface;
+use Kodix\Api\Exceptions\MethodParametersException;
 
 /**
  * Class Holding
@@ -28,21 +29,44 @@ class Holding extends Entity
     /**
      * Get elements list
      *
-     * @param array $filter - params for list filtering
-     * @param array $select - selection fields
-     * @param array $with - selection fields
-     * @param array $order - params for ordering list
+     * @param array $parameters - query parameters
      * @param null $version - method version
+     * @throws MethodParametersException
      * @return ResponseInterface
      */
-    public function getList(array $filter = [], array $select = [], array $with = [], array $order = [], $version = null)
+    public function getList(array $parameters = [], $version = null)
     {
-        return $this->_callMethod('get', $this->_getBaseRoute(), [
-            'filter' => $filter,
-            'select' => $select,
-            'with' => $with,
-            'order' => $order
-        ], [], $version);
+        $getParams = [];
+
+        if(isset($parameters['filter'])){
+            if(!is_array($parameters['filter'])){
+                throw new MethodParametersException('Parameter \'filter\' must be array');
+            }
+            $getParams['filter'] = $parameters['filter'];
+        }
+
+        if(isset($parameters['select'])){
+            if(!is_array($parameters['select'])){
+                throw new MethodParametersException('Parameter \'select\' must be array');
+            }
+            $getParams['select'] = $parameters['select'];
+        }
+
+        if(isset($parameters['with'])){
+            if(!is_array($parameters['with'])){
+                throw new MethodParametersException('Parameter \'with\' must be array');
+            }
+            $getParams['with'] = $parameters['with'];
+        }
+
+        if(isset($parameters['order'])){
+            if(!is_array($parameters['order'])){
+                throw new MethodParametersException('Parameter \'order\' must be array');
+            }
+            $getParams['order'] = $parameters['order'];
+        }
+
+        return $this->_callMethod('get', $this->_getBaseRoute(), $getParams, [], $version);
     }
 
 

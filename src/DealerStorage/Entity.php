@@ -32,24 +32,35 @@ abstract class Entity extends BaseEntity
      * Get element by id
      *
      * @param $id - element id
-     * @param array $select - fields for getting
-     * @param array $with - relations
+     * @param array $parameters - query parameters
      * @param null $version - method version
      * @return ResponseInterface
      * @throws MethodParametersException
      */
-    public function get($id, array $select = [], array $with = [], $version = null)
+    public function get($id, array $parameters = [], $version = null)
     {
         if(strlen($id) === 0){
             throw new MethodParametersException('Does not set $id parameter');
         }
+        $getParameters = [];
+
+        if(isset($parameters['select'])){
+            if(!is_array($parameters['select'])){
+                throw new MethodParametersException('Parameter \'select\' must be array');
+            }
+            $getParameters['select'] = $parameters['select'];
+        }
+
+        if(isset($parameters['with'])){
+            if(!is_array($parameters['with'])){
+                throw new MethodParametersException('Parameter \'with\' must be array');
+            }
+            $getParameters['with'] = $parameters['select'];
+        }
 
         $route = $this->_getBaseRoute(). '/' . $id;
 
-        return $this->_callMethod('get', $route, [
-            'select' => $select,
-            'with' => $with
-        ], [], $version);
+        return $this->_callMethod('get', $route, $parameters, [], $version);
     }
 
     /**
