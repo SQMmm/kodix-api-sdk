@@ -183,10 +183,6 @@ class Client implements ApiInterface
                 throw $e;
             }
             $response = $this->_call($httpMethod, $url, $requestOptions);
-        }catch(RequestException $e){
-
-            $response = $e->getResponse();
-            
         }
 
         $body = json_decode($response->getBody()->getContents(),true);
@@ -204,8 +200,12 @@ class Client implements ApiInterface
      */
     private function _call($httpMethod, $url, array $options = [])
     {
-        $client = new Guzzle();
-        $response = $client->request($httpMethod, $url, $options);
+        try {
+            $client = new Guzzle();
+            $response = $client->request($httpMethod, $url, $options);
+        }catch(RequestException $e){
+            $response = $e->getResponse();
+        }
 
         //check if token has expired
         if($response->getStatusCode() === 461){
