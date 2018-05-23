@@ -17,6 +17,7 @@ use Kodix\Api\Exceptions\NotAllowedMethodException;
 use Kodix\Api\Exceptions\TokenException;
 use GuzzleHttp\Client as Guzzle;
 use Kodix\Api\Exceptions\TokenExpiredException;
+use GuzzleHttp\Exception\RequestException;
 
 /**
  * Class Client
