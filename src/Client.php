@@ -156,11 +156,7 @@ class Client implements ApiInterface
 
         $url = self::API_DOMAIN . '/api/' . $scope . '/' . $version . '/' . $route;
 
-        $requestOptions = [
-            'headers' => [
-                'Authorization' => 'bearer ' . $this->accessToken
-            ]
-        ];
+        $requestOptions = [];
 
         if(count($postParameters) > 0){
             $requestOptions['form_params'] = $postParameters;
@@ -173,16 +169,20 @@ class Client implements ApiInterface
         try{
             $response = $this->_call($httpMethod, $url, $requestOptions);
         }catch (TokenExpiredException $e){
+            echo $e->getMessage() . "\n";
             if(!is_callable($this->onTokenExpired)){
                 throw $e;
             }
+            echo $this->accessToken . "\n";
 
             $result = call_user_func($this->onTokenExpired, $this);
+            echo $this->accessToken . "\n";
 
             if($result === false){
                 throw $e;
             }
             $response = $this->_call($httpMethod, $url, $requestOptions);
+
         }
 
         $body = json_decode($response->getBody()->getContents(),true);
@@ -200,6 +200,10 @@ class Client implements ApiInterface
      */
     private function _call($httpMethod, $url, array $options = [])
     {
+        $options['headers']= [
+            'Authorization' => 'bearer ' . $this->accessToken
+        ];
+
         try {
             $client = new Guzzle();
             $response = $client->request($httpMethod, $url, $options);
