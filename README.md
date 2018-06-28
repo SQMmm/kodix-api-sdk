@@ -6,6 +6,9 @@ Kodix-api-sdk php client for working with kodix services api.
     * dealerships
     * holdings
     * brands
+  * PartsStorage - contains all data about dealer`s service parts. Entities:
+    * parts
+    * dealers
   
 ### Authorization 
 ```php
