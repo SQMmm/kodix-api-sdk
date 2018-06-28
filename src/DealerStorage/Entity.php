@@ -55,12 +55,12 @@ abstract class Entity extends BaseEntity
             if(!is_array($parameters['with'])){
                 throw new MethodParametersException('Parameter \'with\' must be array');
             }
-            $getParameters['with'] = $parameters['select'];
+            $getParameters['with'] = $parameters['with'];
         }
 
         $route = $this->_getBaseRoute(). '/' . $id;
 
-        return $this->_callMethod('get', $route, $parameters, [], $version);
+        return $this->_callMethod('get', $route, $getParameters, [], $version);
     }
 
     /**
